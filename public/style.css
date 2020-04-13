@@ -10,8 +10,6 @@ body {
 .cursor {
   position: absolute;
   border-radius: 100px;
-  overflow: hidden;
-  image-rendering: optimizeQuality;
 }
 
 .cursor.mac {
