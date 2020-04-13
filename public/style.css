@@ -1,0 +1,29 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-size: 16px;
+}
+
+.cursor {
+  position: absolute;
+  border-radius: 100px;
+  overflow: hidden;
+  image-rendering: optimizeQuality;
+}
+
+.cursor.mac {
+  width: 14px;
+  height: 22px;
+  background-image: url('assets/mac.png');
+  background-size: 14px; 
+}
+
+.cursor.win {
+  width: 13px;
+  height: 23px;
+  background-image: url('assets/win.png');
+  background-size: 13px;
+}
