@@ -16,6 +16,11 @@ function platform () {
   }
 }
 
+function remove (cursor) {
+  const element = document.querySelector(`#${ cursor.id }`)
+  element.remove()
+}
+
 function create (id, platform) {
   const element = document.createElement('div')
   element.setAttribute('id', id)
@@ -32,11 +37,16 @@ function move (cursor) {
   element.style.left = `${ cursor.xy.x }px`
 }
 
-function send (xy) {
+function send (type, payload) {
   const msg = {
-    id: id,
-    xy: xy,
-    platform: platform()
+    type: type,
+    id: id
+  }
+
+  switch (type) {
+    case 'move':
+      msg.xy = payload
+      msg.platform = platform()
   }
 
   socket.send(JSON.stringify(msg))
@@ -44,14 +54,27 @@ function send (xy) {
 
 socket.addEventListener('message', (message) => {
   const msg = JSON.parse(message.data)
-  console.log(msg)
-  move(msg)
+
+  switch (msg.type) {
+    case 'move':
+      move(msg)
+      break
+    case 'close':
+      remove(msg)
+      break
+  }
 })
 
+window.onunload = () => {
+  send('close')
+}
+
 document.addEventListener('mousemove', (event) => {
-  send({
+  const xy = {
     x: event.pageX,
     y: event.pageY
-  })
+  }
+
+  send('move', xy)
 })
 
