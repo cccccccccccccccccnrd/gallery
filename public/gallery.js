@@ -1,4 +1,4 @@
-const url = window.location.hostname === 'localhost' ? 'ws://localhost:2627' : 'wss://cnrd.computer/kisd-gallery-ws'
+const url = window.location.hostname === 'localhost' ? 'ws://localhost:2627' : 'wss://cnrd.computer/gallery-ws'
 const socket = new WebSocket(url)
 const id = `CURSOR${ Date.now() }`
 
